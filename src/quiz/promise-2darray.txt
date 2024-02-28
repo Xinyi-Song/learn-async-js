@@ -1,1 +1,9 @@
 Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+
+When the sum2DArray function is called, the execution order based on the console logs will be as follows:
+
+1. "Sum called ... " is logged immediately upon function invocation, indicating the start of the promise's execution.
+2. "returning from sum" is logged next, showing that the function has set up the promise and is exiting, returning the promise object. This occurs before the setTimeout callback has had a chance to execute because of the asynchronous nature of setTimeout.
+3. The JavaScript event loop will then handle the setTimeout callback, and once it's ready (almost immediately, due to the timeout being 0), it will execute the callback.
+4. Inside the callback, after the sum is calculated, "resolving ... " is logged just before calling resolve(sum) for a valid 2D array input, or "rejecting ... " is logged before calling reject('BAD INPUT: Expected array as input') for invalid input.
+5. Finally, the .then() or .catch() attached to the promise will log either "Sum: [result]" or "Error: [error message]" based on whether the promise was resolved or rejected.
